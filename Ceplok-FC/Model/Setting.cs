@@ -13,6 +13,7 @@ namespace Ceplok_FC.Model {
         }
         public SearchMode searchMode;
         public List<string> allowedFileExternals;
+        public string path;
         public List<string> Exts { 
             get { return allowedFileExternals; }
         }
