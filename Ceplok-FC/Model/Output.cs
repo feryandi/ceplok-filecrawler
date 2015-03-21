@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ceplok_FC {
-    class ShellController {
-        static void Main(string[] args) {
-
-        }
+namespace Ceplok_FC.Model {
+    class Output {
+        public List<Docs> Docs { get; set; }
     }
 }
