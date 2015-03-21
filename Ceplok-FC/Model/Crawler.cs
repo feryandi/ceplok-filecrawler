@@ -10,19 +10,21 @@ namespace Ceplok_FC.Model {
     
     static class Crawler {
         public static Output Run(string path, string pattern, Setting setting) {
-            List<Docs> ret;
-            switch (setting.searchMode) {
+            List<Docs> docs;
+            switch (setting.Mode) {
                 case Setting.SearchMode.BFS:
-                    ret = DoBFS(path, pattern, setting);
+                    docs = DoBFS(path, pattern, setting);
                     break;
                 case Setting.SearchMode.DFS:
-                    ret = DoDFS(path, pattern, setting);
+                    docs = DoDFS(path, pattern, setting);
                     break;
                 default:
-                    ret = new List<Docs>();
+                    docs = new List<Docs>();
                     break;
             }
-            return new Output(ret);
+            Output ret = new Output();
+            ret.Docs = docs;
+            return ret;
 
         }
         public static List<Docs> DoBFS(string path, string pattern, Setting setting) {
@@ -32,14 +34,12 @@ namespace Ceplok_FC.Model {
             nodeQueue.Enqueue(path);
             while (nodeQueue.Count != 0) {
                 var curPath = nodeQueue.Dequeue();
-                Console.WriteLine(curPath);
                 ret.AddRange(FindTextInFile(curPath, pattern, setting));
-
                 var childPaths = Directory.GetDirectories(curPath);
-                foreach (string childPath in childPaths)
+                foreach (string childPath in childPaths) {
                     nodeQueue.Enqueue(childPath);
+                }
             }
-            Console.WriteLine("Pake BFS");
             return ret;
         }
 
@@ -58,12 +58,23 @@ namespace Ceplok_FC.Model {
         private static List<Docs> FindTextInFile(string path, string pattern, Setting setting) {
             var ret = new List<Docs>();
             var filePaths = Directory.GetFiles(path);
-            foreach (var fileExts in setting.Exts) {
-                foreach (var filePath in filePaths) {
-                    string texts = File.ReadAllText(filePath);
-                    if (texts.IndexOf(pattern) != -1)
-                        ret.Add(new Docs(filePath, texts));
- 
+            foreach (var filePath in filePaths) {
+                bool valid = false;
+                foreach (var ext in setting.Exts) {
+                    if (filePath.EndsWith(ext))
+                        valid = true;
+                }
+                if (valid) {
+                    var texts = File.ReadAllLines(filePath);
+                    foreach (var text in texts) {
+                        if (text.IndexOf(pattern) != -1) {
+                            Docs doc = new Docs();
+                            doc.Path = filePath;
+                            doc.Title = text;
+                            ret.Add(doc);
+                            break;
+                        }
+                    }
                 }
             }
             return ret;

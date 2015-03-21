@@ -7,11 +7,7 @@ using System.Runtime.Serialization;
 
 namespace Ceplok_FC.Model {
     struct Docs {
-        public Docs(string path, string title) {
-            this.path = path;
-            this.title = title;
-        }
-        public string path;
-        public string title;
+        public string Path { get; set; }
+        public string Title { get; set; }
     }
 }

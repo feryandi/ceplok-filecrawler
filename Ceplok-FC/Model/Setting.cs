@@ -11,11 +11,8 @@ namespace Ceplok_FC.Model {
             BFS,
             DFS
         }
-        public SearchMode searchMode;
-        public List<string> allowedFileExternals;
-        public string path;
-        public List<string> Exts { 
-            get { return allowedFileExternals; }
-        }
+        public SearchMode Mode { get; set; }
+        public List<string> Exts { get; set; }
+        public string Path { get; set; }
     }
 }

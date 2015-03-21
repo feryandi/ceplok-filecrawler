@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ceplok_FC.Model {
     class Input {
-        public string query;
-        public Setting setting;
-        public string Query {
-            get { return query; }
-        }
-        public Setting Setting {
-            get { return setting; }
-        }
+        public string Query { get; set; }
+        public Setting Setting { get; set; }
     }
 }
