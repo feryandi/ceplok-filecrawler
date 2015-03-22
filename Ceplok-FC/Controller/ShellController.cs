@@ -24,7 +24,7 @@ namespace Ceplok_FC {
                 Console.WriteLine(doc.Path);
                 Console.WriteLine(doc.Title);
             }
-            /* Return JSON to Ruby Controller */
+            /* Return JSON to PHP Controller */
             json = JSONSerializer.Serialize(output);
             Console.WriteLine(json);
             while (true) ;
