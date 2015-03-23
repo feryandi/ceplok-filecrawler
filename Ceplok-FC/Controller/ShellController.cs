@@ -27,7 +27,6 @@ namespace Ceplok_FC {
             /* Return JSON to PHP Controller */
             json = JSONSerializer.Serialize(output);
             Console.WriteLine(json);
-            while (true) ;
         }
     }
 }

@@ -63,7 +63,7 @@
 			<div class="col-sm-6">
 				<div class="form-group" width="70%">
 					<form action="search.php" method="POST">
-						<input type="text" name="keyword" value="What do you want to find?" onfocus="this.value=&#39;&#39;" onblur="this.value=&#39;What do you want to find?&#39;" class="form-control">
+						<input type="text" name="query" value="What do you want to find?" onfocus="this.value=&#39;&#39;" onblur="this.value=&#39;What do you want to find?&#39;" class="form-control">
 					</form>
 				</div>
 			</div>

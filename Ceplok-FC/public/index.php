@@ -1,59 +1,31 @@
 <?php
-	/*
-	|--------------------------------------------------------------------------
-	| Include the environtment variables
-	|--------------------------------------------------------------------------
-	|
-	| Define the constants needed for our application to work
-	|
-	*/
-	require_once 'env.php';
+	require '../Model/Input.php';
+	require '../Controller/View.php';
+	function exec_ceplok($input) {
+		$descriptorspec = array(0 => array("pipe", "r"), 1 => array("pipe", "w"));
+		$cwd = "E:/Projects/Software/Visual Studio 2013/CeplokFC/Ceplok-FC/bin/Debug";
+		$process = proc_open('Ceplok-FC', $descriptorspec, $pipes, $cwd);
+		if (is_resource($process)) {
+			fwrite($pipes[0], $input);
+			fclose($pipes[0]);
 
-
-	/*
-	|--------------------------------------------------------------------------
-	| Define The Auto Loader
-	|--------------------------------------------------------------------------
-	|
-	| Define the autoload function to automatically generate class.
-	|
-	*/
-	function model_autoloader($class_name) {
-		if (defined('__CLASSDIR__')) {
-    		include __CLASSDIR__ . $class_name . '.php';
+			return stream_get_contents($pipes[1]);
 		}
+		else
+			return null;
 	}
-
-	/*
-	|--------------------------------------------------------------------------
-	| Register The Auto Loader
-	|--------------------------------------------------------------------------
-	|
-	| After we define the autoloaders, we need to register to the PHP
-	| itselves so it would work
-	|
-	*/
-
-	spl_autoload_register('model_autoloader');
-
-	/*
-	|--------------------------------------------------------------------------
-	| Get the Application 
-	|--------------------------------------------------------------------------
-	|
-	| Call the application boostrap script to boot up our 
-	| application.
-	|
-	*/
-	$app = require_once __DIR__.'/../bootstrap/app.php';
-
-	/*
-	|--------------------------------------------------------------------------
-	| Process the Request
-	|--------------------------------------------------------------------------
-	|
-	| Process the get request sent to server.
-	|
-	*/
-
-	$app->Run();
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		$query = $_POST["query"];
+		$input = new Input();
+		$input->Query = $query;
+		$input->Setting->Mode = 0;
+		$input->Setting->Exts = array(".txt");
+		$input->Setting->Path = 'E://Projects';
+		$output = exec_ceplok(json_encode(get_object_vars($input)));
+		$arr = json_decode($output);
+		extract($arr);
+		View::render($arr);
+	}
+	if ($_SERVER["REQUEST_METHOD"] == "GET") {
+		readfile(__DIR__ . '/../View/welcome.php');
+	}
