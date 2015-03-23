@@ -2,16 +2,23 @@
 <!-- saved from url=(0065)https://dl.dropboxusercontent.com/u/91005861/Tubes%202/index.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Nyeplok</title>
-	<link rel="stylesheet" href="https://dl.dropboxusercontent.com/s/75udghi68sblkbz/style.css">
+	<link rel="stylesheet" href="css/style.css">
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
 
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 
+	<!-- Latest prodcution jQuery -->
+	<script type="text/javascript" src="js/jquery-2.1.3.js"></script>
+	
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="https://dl.dropbox.com/s/mlms1hxbdu1ifcp/menu.js"></script>
+	<script type="text/javascript" src="js/menu.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+	<!-- Our scripts -->
+	<script type="text/javascript" src="js/main.js"></script>
+
 	<meta charset="utf-8">
 </head>
 <body style="background-color:#2d2f45">
@@ -62,14 +69,16 @@
 
 			<div class="col-sm-6">
 				<div class="form-group" width="70%">
-					<form action="search.php" method="POST">
-						<input type="text" name="query" value="What do you want to find?" onfocus="this.value=&#39;&#39;" onblur="this.value=&#39;What do you want to find?&#39;" class="form-control">
+					<form id="query-form" method="POST">
+						<input id="query" type="text" name="query" value="What do you want to find?" onfocus="this.value=&#39;&#39;" onblur="this.value=&#39;What do you want to find?&#39;" class="form-control">
+						<input class="btn btn-primary" type="submit" value="Search (beneran)">
 					</form>
 				</div>
 			</div>
 
 			<div class="col-sm-3">
-				<button class="btn btn-primary"><span class="glyphicon glyphicon-search" style="margin-right: 10px"></span>Find!</button>
+				<ul id="results">
+				</ul>
 			</div>
 		</div>
 
@@ -77,7 +86,6 @@
 			<div class="col-sm-12 text-center" style="color: #fff">2015 - Tim Nyeplok</div>
 		</div>
 	</div>
-
 
 
 

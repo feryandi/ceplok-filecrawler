@@ -4,7 +4,7 @@
 	        extract($variables);
 
 	       	ob_start();
-	        include $file;
+	        include __DIR__ . '/../View/' . $file;
 	        $renderedView = ob_get_clean();
 
 	        return $renderedView;
