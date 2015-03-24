@@ -8,6 +8,6 @@ using System.Runtime.Serialization;
 namespace Ceplok_FC.Model {
     struct Docs {
         public string Path { get; set; }
-        public string Title { get; set; }
+        public string Preview { get; set; }
     }
 }

@@ -4,11 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Ceplok_FC.Model {
     
     static class Crawler {
+        private const int pad = 3;
         public static Output Run(string path, string pattern, Setting setting) {
             List<Docs> docs;
             switch (setting.Mode) {
@@ -67,10 +69,20 @@ namespace Ceplok_FC.Model {
                 if (valid) {
                     var texts = File.ReadAllLines(filePath);
                     foreach (var text in texts) {
-                        if (text.IndexOf(pattern) != -1) {
+                        var idx = text.IndexOf(pattern);
+                        if (idx != -1) {
+                            var splitPattern = @"\b(\w+)\b";
+                            string[] words = Regex.Split(text, splitPattern);
+                            string newText = String.Empty;
+                            int widx = 0;
+                            while (widx < words.Length && words[widx].IndexOf(pattern) == -1)
+                                ++widx;
+                            for (int i = Math.Max(widx - pad, 0); i < Math.Min(widx + pad, words.Length); ++i)
+                                newText += words[i];
+
                             Docs doc = new Docs();
                             doc.Path = filePath;
-                            doc.Title = text;
+                            doc.Preview = newText;
                             ret.Add(doc);
                             break;
                         }
