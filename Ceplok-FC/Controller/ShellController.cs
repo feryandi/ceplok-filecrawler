@@ -20,14 +20,10 @@ namespace Ceplok_FC {
             Input input = JSONSerializer.Deserialize<Input>(json);
             /* Pass the JSON input to Model */
             Output output = Crawler.Run(input.Setting.Path, input.Query, input.Setting);
-            foreach (Docs doc in output.Docs) {
-                Console.WriteLine(doc.Path);
-                Console.WriteLine(doc.Title);
-            }
-            /* Return JSON to Ruby Controller */
+
+            /* Return JSON to PHP Controller */
             json = JSONSerializer.Serialize(output);
             Console.WriteLine(json);
-            while (true) ;
         }
     }
 }
