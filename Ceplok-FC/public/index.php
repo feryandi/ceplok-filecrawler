@@ -1,8 +1,7 @@
 <?php
 	require __DIR__ . '/../bootstrap/autoload.php';
 
-	function send_message( $message, $progress) {
-	    $d = array("message" => $message , "progress" => $progress);
+	function send_message( $message) {
 
 	    echo "data: " . $message . PHP_EOL;
 	    echo PHP_EOL;
@@ -19,8 +18,8 @@
 			fwrite($pipes[0], $input);
 			fclose($pipes[0]);
 			/* Return HTTP Response */
-			while ( ($get = fgets($pipes[1])) !== false) {
-				send_message($get, "a");
+			while ( ($message = fgets($pipes[1])) !== false) {
+				send_message($message);
 			}
 		}
 	}

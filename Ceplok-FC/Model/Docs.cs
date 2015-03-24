@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
 namespace Ceplok_FC.Model {
-    struct Docs {
+    class Docs : Output {
+        public Docs() {
+            OutputType = Type.Docs;
+        }
         public string Path { get; set; }
         public string Preview { get; set; }
     }

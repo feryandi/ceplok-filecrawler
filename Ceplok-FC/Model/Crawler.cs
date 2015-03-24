@@ -10,9 +10,11 @@ using System.Web.Script.Serialization;
 
 namespace Ceplok_FC.Model {
     
-    static class Crawler {
+    class Crawler {
         private const int pad = 3;
-        public static void Run(string path, string pattern, Setting setting) {
+        private int count = 0;
+        public void Run(string path, string pattern, Setting setting) {
+            count = 0;
             switch (setting.Mode) {
                 case Setting.SearchMode.BFS:
                     DoBFS(path, pattern, setting);
@@ -25,7 +27,7 @@ namespace Ceplok_FC.Model {
             }
 
         }
-        public static void DoBFS(string path, string pattern, Setting setting) {
+        public void DoBFS(string path, string pattern, Setting setting) {
             var nodeQueue = new Queue<string>();
 
             nodeQueue.Enqueue(path);
@@ -42,7 +44,7 @@ namespace Ceplok_FC.Model {
             }
         }
 
-        public static void DoDFS(string path, string pattern, Setting setting) {
+        public void DoDFS(string path, string pattern, Setting setting) {
             FindTextInFile(path, pattern, setting);
             try {
                 var childPaths = Directory.GetDirectories(path);
@@ -52,7 +54,7 @@ namespace Ceplok_FC.Model {
             catch (Exception ex) { }
         }
 
-        private static void FindTextInFile(string path, string pattern, Setting setting) {
+        private void FindTextInFile(string path, string pattern, Setting setting) {
             try {
                 var filePaths = Directory.GetFiles(path);
                 foreach (var filePath in filePaths) {
@@ -78,18 +80,19 @@ namespace Ceplok_FC.Model {
                                 Docs doc = new Docs();
                                 doc.Path = filePath;
                                 doc.Preview = newText;
-                                Write(doc);
+                                doc.Write();
                                 break;
                             }
                         }
                     }
+                    ++count;
+                    Counter counter = new Counter();
+                    counter.Checked = count;
+                    counter.Total = 1000;
+                    counter.Write();
                 }
             }
             catch (Exception ex) { }
-        }
-        private static void Write(Docs doc) {
-            JavaScriptSerializer JSONSerializer = new JavaScriptSerializer();
-            Console.WriteLine(JSONSerializer.Serialize(doc));
         }
     }
 }

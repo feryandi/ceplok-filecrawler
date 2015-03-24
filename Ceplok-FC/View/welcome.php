@@ -80,8 +80,11 @@
 		</div>
 	</div>
 	</form>
+	<div>
+		<div class="col-sm-3"></div>
+		<span id="counter">Count: 0</span>
+		<ul id="results" style="font-color: red">
+		</ul>
+	</div>
 </body>
-</html>
-<html>
-
 </html>

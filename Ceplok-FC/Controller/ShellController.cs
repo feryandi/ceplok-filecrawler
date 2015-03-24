@@ -18,7 +18,8 @@ namespace Ceplok_FC {
             }
             JavaScriptSerializer JSONSerializer = new JavaScriptSerializer();
             Input input = JSONSerializer.Deserialize<Input>(json);
-            Crawler.Run(input.Setting.Path, input.Query, input.Setting);
+            Crawler crawler = new Crawler();
+            crawler.Run(input.Setting.Path, input.Query, input.Setting);
         }
     }
 }

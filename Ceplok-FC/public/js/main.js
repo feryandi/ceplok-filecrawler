@@ -1,9 +1,10 @@
-function PopulateResult(results) {
-	for (var i in results) {
-		var result = results[i];
-		$("#results").append("<li>" + result.Preview + "</li>");
-		$("#results").append("<li>" + result.Path + "</li>");
-	}
+function PopulateResult(result) {
+	$("#results").append("<li>" + result.Preview + "</li>");
+	$("#results").append("<li>" + result.Path + "</li>");
+}
+
+function UpdateCounter(checked, total) {
+	$("#counter").text(checked + '/' + total);
 }
 
 function RegisterHandler() {
@@ -16,14 +17,18 @@ function RegisterHandler() {
 			left: "+= 40px"
 		}, 500);
 	});
-
 }
 
 function Query() {
 	var eventSource = new EventSource("index.php?" + $("#query-form").serialize());
 	eventSource.onmessage = function(e) {
 		var result = JSON.parse(e.data);
-		console.log(e.data);
+		if (result.OutputType == 0) {
+			UpdateCounter(result.Checked, result.Total);
+		}
+		if (result.OutputType == 1) {
+			console.log(result.Preview);
+		}
 	}
 	eventSource.onerror = function(e) {
 		eventSource.close();
