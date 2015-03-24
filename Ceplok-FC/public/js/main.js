@@ -15,7 +15,8 @@ function RegisterHandler() {
 			data: $("#query-form").serialize(),
 			success: function (data) {
 				console.log(data);
-				console.log("HUHU");
+				var obj = JSON.parse(data);
+				PopulateResult(obj.Docs);
 			}
 		});
 		return false;
