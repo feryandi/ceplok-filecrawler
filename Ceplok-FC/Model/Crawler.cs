@@ -32,52 +32,60 @@ namespace Ceplok_FC.Model {
             while (nodeQueue.Count != 0) {
                 var curPath = nodeQueue.Dequeue();
                 FindTextInFile(curPath, pattern, setting);
-                var childPaths = Directory.GetDirectories(curPath);
-                foreach (string childPath in childPaths) {
-                    nodeQueue.Enqueue(childPath);
+                try {
+                    var childPaths = Directory.GetDirectories(curPath);
+                    foreach (string childPath in childPaths) {
+                        nodeQueue.Enqueue(childPath);
+                    }
                 }
+                catch (Exception ex) { }
             }
         }
 
         public static void DoDFS(string path, string pattern, Setting setting) {
             FindTextInFile(path, pattern, setting);
-
-            var childPaths = Directory.GetDirectories(path);
-            foreach (var childPath in childPaths)
-                DoDFS(childPath, pattern, setting);
+            try {
+                var childPaths = Directory.GetDirectories(path);
+                foreach (var childPath in childPaths)
+                    DoDFS(childPath, pattern, setting);
+            }
+            catch (Exception ex) { }
         }
 
         private static void FindTextInFile(string path, string pattern, Setting setting) {
-            var filePaths = Directory.GetFiles(path);
-            foreach (var filePath in filePaths) {
-                bool valid = false;
-                foreach (var ext in setting.Exts) {
-                    if (filePath.EndsWith(ext))
-                        valid = true;
-                }
-                if (valid) {
-                    var texts = File.ReadAllLines(filePath);
-                    foreach (var text in texts) {
-                        var idx = text.IndexOf(pattern);
-                        if (idx != -1) {
-                            var splitPattern = @"\b(\w+)\b";
-                            string[] words = Regex.Split(text, splitPattern);
-                            string newText = String.Empty;
-                            int widx = 0;
-                            while (widx < words.Length && words[widx].IndexOf(pattern) == -1)
-                                ++widx;
-                            for (int i = Math.Max(widx - pad, 0); i < Math.Min(widx + pad, words.Length); ++i)
-                                newText += words[i];
+            try {
+                var filePaths = Directory.GetFiles(path);
+                foreach (var filePath in filePaths) {
+                    bool valid = false;
+                    foreach (var ext in setting.Exts) {
+                        if (filePath.EndsWith(ext))
+                            valid = true;
+                    }
+                    if (valid) {
+                        var texts = File.ReadAllLines(filePath);
+                        foreach (var text in texts) {
+                            var idx = text.IndexOf(pattern);
+                            if (idx != -1) {
+                                var splitPattern = @"\b(\w+)\b";
+                                string[] words = Regex.Split(text, splitPattern);
+                                string newText = String.Empty;
+                                int widx = 0;
+                                while (widx < words.Length && words[widx].IndexOf(pattern) == -1)
+                                    ++widx;
+                                for (int i = Math.Max(widx - pad, 0); i < Math.Min(widx + pad, words.Length); ++i)
+                                    newText += words[i];
 
-                            Docs doc = new Docs();
-                            doc.Path = filePath;
-                            doc.Preview = newText;
-                            Write(doc);
-                            break;
+                                Docs doc = new Docs();
+                                doc.Path = filePath;
+                                doc.Preview = newText;
+                                Write(doc);
+                                break;
+                            }
                         }
                     }
                 }
             }
+            catch (Exception ex) { }
         }
         private static void Write(Docs doc) {
             JavaScriptSerializer JSONSerializer = new JavaScriptSerializer();

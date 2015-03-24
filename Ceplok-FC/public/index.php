@@ -1,10 +1,10 @@
 <?php
 	require __DIR__ . '/../bootstrap/autoload.php';
 
-	function send_message($mtype, $message) {
-	    $d = array('message' => $message , 'mtype' => $mtype);
-	      
-	    echo "data: " . json_encode($d) . PHP_EOL;
+	function send_message( $message, $progress) {
+	    $d = array("message" => $message , "progress" => $progress);
+
+	    echo "data: " . $message . PHP_EOL;
 	    echo PHP_EOL;
 	      
 	    ob_flush();
@@ -19,17 +19,16 @@
 			fwrite($pipes[0], $input);
 			fclose($pipes[0]);
 			/* Return HTTP Response */
-			while ($get = fgets($pipes[1])) {
-				$message = fgets($pipes[1]);
-				send_message($mtype, $message);			
+			while ( ($get = fgets($pipes[1])) !== false) {
+				send_message($get, "a");
 			}
 		}
-		else
-			return null;
 	}
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
 		if (isset($_GET["query"])) {
-			
+			header('Content-Type: text/event-stream');
+			// recommended to prevent caching of event data.
+			header('Cache-Control: no-cache'); 
 			$query = $_GET["query"];
 			$input = new Input();
 			$input->Query = $query;

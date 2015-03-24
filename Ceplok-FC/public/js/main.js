@@ -20,7 +20,7 @@ function RegisterHandler() {
 }
 
 function Query() {
-	var eventSource = new EventSource("index.php");
+	var eventSource = new EventSource("index.php?" + $("#query-form").serialize());
 	eventSource.onmessage = function(e) {
 		var result = JSON.parse(e.data);
 		console.log(e.data);
@@ -29,7 +29,6 @@ function Query() {
 		eventSource.close();
 	}
 }
-
 $(document).ready(function() {
 	RegisterHandler();
 });
