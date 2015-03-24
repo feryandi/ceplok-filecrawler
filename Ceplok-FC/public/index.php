@@ -19,7 +19,7 @@
 		$input->Query = $query;
 		$input->Setting->Mode = 0;
 		$input->Setting->Exts = array(".txt");
-		$input->Setting->Path = 'E://Project';
+		$input->Setting->Path = 'E://Projects';
 		$json = exec_ceplok(json_encode(get_object_vars($input)));
 		echo $json;
 	}
