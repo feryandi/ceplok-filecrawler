@@ -3,12 +3,11 @@ function PopulateResult(results) {
 		var result = results[i];
 		console.log(result.Title);
 		console.log(result.Path);
-		$("#results").append("<li>" + result.Title + "</li>");
-		$("#results").append("<li>" + result.Path + "</li>");
+		$("#results").append("<li><a href=\"file:///" + result.Path + "\">" + result.Title + "</a></li>");
 	}
 }
 
-function Register() {
+function RegisterHandler() {
 	$("#query-form").submit(function() {
 		var url = "/";
 		$.ajax({
@@ -22,8 +21,14 @@ function Register() {
 		});
 		return false;
 	});
+	$("#menu-button").click(function() {
+		$("#menu").animate({
+			left: "+= 40px"
+		}, 500);
+	});
+
 }
 
 $(document).ready(function() {
-	Register();
+	RegisterHandler();
 });

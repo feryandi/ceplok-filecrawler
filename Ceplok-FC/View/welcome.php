@@ -52,7 +52,7 @@
 		<div class="row" style="margin-top: 3%; position: relative; z-index:100;"> 
 			<div class="col-sm-1"></div>
 			<div class="col-sm-11">
-				<button type="button" id="menu-button" onclick="toggleMenu()" class="btn btn-default btn-lg" style="background-color: #2d2f45; background-image: none; border-shadow:none; text-shadow:none;"> 
+				<button type="button" id="menu-button" class="btn btn-default btn-lg" style="background-color: #2d2f45; background-image: none; border-shadow:none; text-shadow:none;"> 
 					<span id="button-icon" class="glyphicon glyphicon-plus-sign" style="color: #fff" aria-hidden="true"></span>	
 				</button>
 			</div>
