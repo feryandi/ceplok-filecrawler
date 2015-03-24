@@ -1,9 +1,8 @@
 function PopulateResult(results) {
 	for (var i in results) {
 		var result = results[i];
-		console.log(result.Title);
-		console.log(result.Path);
-		$("#results").append("<li><a href=\"file:///" + result.Path + "\">" + result.Title + "</a></li>");
+		$("#results").append("<li>" + result.Preview + "</li>");
+		$("#results").append("<li>" + result.Path + "</li>");
 	}
 }
 
@@ -15,8 +14,8 @@ function RegisterHandler() {
 			url: url,
 			data: $("#query-form").serialize(),
 			success: function (data) {
-				var obj = JSON.parse(data);
-				PopulateResult(obj.Docs);
+				console.log(data);
+				console.log("HUHU");
 			}
 		});
 		return false;
