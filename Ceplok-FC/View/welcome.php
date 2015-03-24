@@ -69,7 +69,7 @@
 
 			<div class="col-sm-6">
 				<div class="form-group" width="70%">
-					<form id="query-form" method="POST">
+					<form id="query-form">
 						<input id="query" type="text" name="query" value="What do you want to find?" onfocus="this.value=&#39;&#39;" onblur="this.value=&#39;What do you want to find?&#39;" class="form-control">
 						<input class="btn btn-primary" type="submit" value="Search (beneran)">
 					</form>

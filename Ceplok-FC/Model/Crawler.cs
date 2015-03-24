@@ -6,59 +6,48 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace Ceplok_FC.Model {
     
     static class Crawler {
         private const int pad = 3;
-        public static Output Run(string path, string pattern, Setting setting) {
-            List<Docs> docs;
+        public static void Run(string path, string pattern, Setting setting) {
             switch (setting.Mode) {
                 case Setting.SearchMode.BFS:
-                    docs = DoBFS(path, pattern, setting);
+                    DoBFS(path, pattern, setting);
                     break;
                 case Setting.SearchMode.DFS:
-                    docs = DoDFS(path, pattern, setting);
+                    DoDFS(path, pattern, setting);
                     break;
                 default:
-                    docs = new List<Docs>();
                     break;
             }
-            Output ret = new Output();
-            ret.Docs = docs;
-            return ret;
 
         }
-        public static List<Docs> DoBFS(string path, string pattern, Setting setting) {
-            var ret = new List<Docs>();
+        public static void DoBFS(string path, string pattern, Setting setting) {
             var nodeQueue = new Queue<string>();
 
             nodeQueue.Enqueue(path);
             while (nodeQueue.Count != 0) {
                 var curPath = nodeQueue.Dequeue();
-                ret.AddRange(FindTextInFile(curPath, pattern, setting));
+                FindTextInFile(curPath, pattern, setting);
                 var childPaths = Directory.GetDirectories(curPath);
                 foreach (string childPath in childPaths) {
                     nodeQueue.Enqueue(childPath);
                 }
             }
-            return ret;
         }
 
-        public static List<Docs> DoDFS(string path, string pattern, Setting setting) {
-            var ret = new List<Docs>();
-
-            ret.AddRange(FindTextInFile(path, pattern, setting));
+        public static void DoDFS(string path, string pattern, Setting setting) {
+            FindTextInFile(path, pattern, setting);
 
             var childPaths = Directory.GetDirectories(path);
             foreach (var childPath in childPaths)
-                ret.AddRange(DoDFS(childPath, pattern, setting));
-            Console.WriteLine("Pake DFS");
-            return ret;
+                DoDFS(childPath, pattern, setting);
         }
 
-        private static List<Docs> FindTextInFile(string path, string pattern, Setting setting) {
-            var ret = new List<Docs>();
+        private static void FindTextInFile(string path, string pattern, Setting setting) {
             var filePaths = Directory.GetFiles(path);
             foreach (var filePath in filePaths) {
                 bool valid = false;
@@ -83,13 +72,16 @@ namespace Ceplok_FC.Model {
                             Docs doc = new Docs();
                             doc.Path = filePath;
                             doc.Preview = newText;
-                            ret.Add(doc);
+                            Write(doc);
                             break;
                         }
                     }
                 }
             }
-            return ret;
+        }
+        private static void Write(Docs doc) {
+            JavaScriptSerializer JSONSerializer = new JavaScriptSerializer();
+            Console.WriteLine(JSONSerializer.Serialize(doc));
         }
     }
 }

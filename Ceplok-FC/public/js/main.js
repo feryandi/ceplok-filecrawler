@@ -14,9 +14,8 @@ function Register() {
 			url: url,
 			data: $("#query-form").serialize(),
 			success: function (data) {
-				var obj = JSON.parse(data);
 				console.log(data);
-				PopulateResult(obj.Docs);
+				console.log("HUHU");
 			}
 		});
 		return false;

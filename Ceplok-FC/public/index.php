@@ -8,7 +8,11 @@
 			fwrite($pipes[0], $input);
 			fclose($pipes[0]);
 			/* Return HTTP Response */
-			return stream_get_contents($pipes[1]);
+			while ($get = fgets($pipes[1])) {
+				ob_end_flush();
+				echo $get;
+				ob_start();
+			}
 		}
 		else
 			return null;
@@ -19,7 +23,7 @@
 		$input->Query = $query;
 		$input->Setting->Mode = 0;
 		$input->Setting->Exts = array(".txt");
-		$input->Setting->Path = 'E://Projects';
+		$input->Setting->Path = 'E:/test';
 		$json = exec_ceplok(json_encode(get_object_vars($input)));
 		echo $json;
 	}
