@@ -8,17 +8,7 @@ function PopulateResult(results) {
 
 function RegisterHandler() {
 	$("#query-form").submit(function() {
-		var url = "/";
-		$.ajax({
-			type: "POST",
-			url: url,
-			data: $("#query-form").serialize(),
-			success: function (data) {
-				console.log(data);
-				var obj = JSON.parse(data);
-				PopulateResult(obj.Docs);
-			}
-		});
+		Query();
 		return false;
 	});
 	$("#menu-button").click(function() {
@@ -27,6 +17,17 @@ function RegisterHandler() {
 		}, 500);
 	});
 
+}
+
+function Query() {
+	var eventSource = new EventSource("index.php");
+	eventSource.onmessage = function(e) {
+		var result = JSON.parse(e.data);
+		console.log(e.data);
+	}
+	eventSource.onerror = function(e) {
+		eventSource.close();
+	}
 }
 
 $(document).ready(function() {
