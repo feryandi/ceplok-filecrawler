@@ -1,8 +1,6 @@
 function PopulateResult(results) {
 	for (var i in results) {
 		var result = results[i];
-		console.log(result.Title);
-		console.log(result.Path);
 		$("#results").append("<li>" + result.Title + "</li>");
 		$("#results").append("<li>" + result.Path + "</li>");
 	}
@@ -16,6 +14,7 @@ function Register() {
 			url: url,
 			data: $("#query-form").serialize(),
 			success: function (data) {
+				console.log(data);
 				var obj = JSON.parse(data);
 				PopulateResult(obj.Docs);
 			}

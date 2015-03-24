@@ -8,20 +8,23 @@
 			fwrite($pipes[0], $input);
 			fclose($pipes[0]);
 			/* Return HTTP Response */
-			return stream_get_contents($pipes[1]);
+			echo stream_get_contents($pipes[1]);
 		}
 		else
 			return null;
 	}
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$query = $_POST["query"];
+
 		$input = new Input();
 		$input->Query = $query;
-		$input->Setting->Mode = 0;
+		if (isset($_POST["algo"]))
+			$input->Setting->Mode = 1;
+		else
+			$input->Setting->Mode = 0;
 		$input->Setting->Exts = array(".txt");
-		$input->Setting->Path = 'E://Projects';
-		$json = exec_ceplok(json_encode(get_object_vars($input)));
-		echo $json;
+		$input->Setting->Path = $_POST["sdir"];
+		return exec_ceplok(json_encode(get_object_vars($input), JSON_UNESCAPED_SLASHES));
 	}
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
 		readfile(__DIR__ . '/../View/welcome.php');
