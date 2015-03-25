@@ -15,7 +15,6 @@ namespace Ceplok_FC.Model {
         public void Write() {
             JavaScriptSerializer JSONSerializer = new JavaScriptSerializer();
             Console.WriteLine(JSONSerializer.Serialize(this));
-            System.IO.File.AppendAllText(@"E:\log.txt", JSONSerializer.Serialize(this) + "\n");
         }
     }
 }

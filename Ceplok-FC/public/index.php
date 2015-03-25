@@ -18,9 +18,15 @@
 			fwrite($pipes[0], $input);
 			fclose($pipes[0]);
 			/* Return HTTP Response */
-			while ( ($message = fgets($pipes[1])) !== false) {
-				send_message($message);
+			send_message($input);
+			while ( !feof($pipes[1]) ) {
+				if ( ($message = fgets($pipes[1])) !== false) {
+					send_message($message);
+					set_time_limit(ini_get("max_execution_time"));
+				}
 			}
+			fclose($pipes[1]);
+			$result = proc_close($process);
 		}
 	}
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {

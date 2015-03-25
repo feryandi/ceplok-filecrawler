@@ -35,31 +35,33 @@ function RegisterHandler() {
 	});
 }
 
+var eventSource = null;
+
 function Query() {
-	var eventSource = new EventSource("index.php?" + $("#query-form").serialize());
-	eventSource.onmessage = function(e) {
-		var result = JSON.parse(e.data);
-		if (result.OutputType == 0) {
-			UpdateCounter(result.Checked, result.Total);
+	if (eventSource === null || eventSource.readyState == EventSource.CLOSED) {
+		eventSource = new EventSource("index.php?" + $("#query-form").serialize());
+		eventSource.onmessage = function(e) {
+			var result = JSON.parse(e.data);
+			if (result.OutputType == 0) {
+				UpdateCounter(result.Checked, result.Total);
+			}
+			if (result.OutputType == 1) {
+				/*Showing Result*/
+				var prevDiv = document.createElement("div");
+				var pathDiv = document.createElement("div");
+
+				pathDiv.innerHTML = result.Path;
+
+				prevDiv.innerHTML = result.Preview;
+				$(prevDiv).addClass('result');
+
+	        	$("#result-list").append(prevDiv);
+	        	$(prevDiv).append(pathDiv);
+			}
 		}
-		if (result.OutputType == 1) {
-			/*Showing Result*/
-			var prevDiv = document.createElement("div");
-			var pathDiv = document.createElement("div");
-
-			pathDiv.innerHTML = result.Path;
-
-			prevDiv.innerHTML = result.Preview;
-			$(prevDiv).addClass('result');
-
-        	$("#result-list").append(prevDiv);
-        	$(prevDiv).append(pathDiv);
-
-			console.log(result.Preview);
+		eventSource.onerror = function(e) {
+			eventSource.close();
 		}
-	}
-	eventSource.onerror = function(e) {
-		eventSource.close();
 	}
 }
 $(document).ready(function() {
