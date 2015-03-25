@@ -18,12 +18,8 @@ namespace Ceplok_FC {
             }
             JavaScriptSerializer JSONSerializer = new JavaScriptSerializer();
             Input input = JSONSerializer.Deserialize<Input>(json);
-            /* Pass the JSON input to Model */
-            Output output = Crawler.Run(input.Setting.Path, input.Query, input.Setting);
-
-            /* Return JSON to PHP Controller */
-            json = JSONSerializer.Serialize(output);
-            Console.WriteLine(json);
+            Crawler crawler = new Crawler();
+            crawler.Run(input.Setting.Path, input.Query, input.Setting);
         }
     }
 }

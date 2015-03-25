@@ -4,80 +4,95 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace Ceplok_FC.Model {
     
-    static class Crawler {
-        public static Output Run(string path, string pattern, Setting setting) {
-            List<Docs> docs;
+    class Crawler {
+        private const int pad = 3;
+        private int count = 0;
+        public void Run(string path, string pattern, Setting setting) {
+            count = 0;
             switch (setting.Mode) {
                 case Setting.SearchMode.BFS:
-                    docs = DoBFS(path, pattern, setting);
+                    DoBFS(path, pattern, setting);
                     break;
                 case Setting.SearchMode.DFS:
-                    docs = DoDFS(path, pattern, setting);
+                    DoDFS(path, pattern, setting);
                     break;
                 default:
-                    docs = new List<Docs>();
                     break;
             }
-            Output ret = new Output();
-            ret.Docs = docs;
-            return ret;
 
         }
-        public static List<Docs> DoBFS(string path, string pattern, Setting setting) {
-            var ret = new List<Docs>();
+        public void DoBFS(string path, string pattern, Setting setting) {
             var nodeQueue = new Queue<string>();
 
             nodeQueue.Enqueue(path);
             while (nodeQueue.Count != 0) {
                 var curPath = nodeQueue.Dequeue();
-                ret.AddRange(FindTextInFile(curPath, pattern, setting));
-                var childPaths = Directory.GetDirectories(curPath);
-                foreach (string childPath in childPaths) {
-                    nodeQueue.Enqueue(childPath);
-                }
-            }
-            return ret;
-        }
-
-        public static List<Docs> DoDFS(string path, string pattern, Setting setting) {
-            var ret = new List<Docs>();
-
-            ret.AddRange(FindTextInFile(path, pattern, setting));
-
-            var childPaths = Directory.GetDirectories(path);
-            foreach (var childPath in childPaths)
-                ret.AddRange(DoDFS(childPath, pattern, setting));
-            Console.WriteLine("Pake DFS");
-            return ret;
-        }
-
-        private static List<Docs> FindTextInFile(string path, string pattern, Setting setting) {
-            var ret = new List<Docs>();
-            var filePaths = Directory.GetFiles(path);
-            foreach (var filePath in filePaths) {
-                bool valid = false;
-                foreach (var ext in setting.Exts) {
-                    if (filePath.EndsWith(ext))
-                        valid = true;
-                }
-                if (valid) {
-                    var texts = File.ReadAllLines(filePath);
-                    foreach (var text in texts) {
-                        if (text.IndexOf(pattern) != -1) {
-                            Docs doc = new Docs();
-                            doc.Path = filePath;
-                            doc.Title = text;
-                            ret.Add(doc);
-                            break;
-                        }
+                FindTextInFile(curPath, pattern, setting);
+                try {
+                    var childPaths = Directory.GetDirectories(curPath);
+                    foreach (string childPath in childPaths) {
+                        nodeQueue.Enqueue(childPath);
                     }
                 }
+                catch (Exception ex) { }
             }
-            return ret;
+        }
+
+        public void DoDFS(string path, string pattern, Setting setting) {
+            FindTextInFile(path, pattern, setting);
+            try {
+                var childPaths = Directory.GetDirectories(path);
+                foreach (var childPath in childPaths)
+                    DoDFS(childPath, pattern, setting);
+            }
+            catch (Exception ex) { }
+        }
+
+        private void FindTextInFile(string path, string pattern, Setting setting) {
+            try {
+                var filePaths = Directory.GetFiles(path);
+                foreach (var filePath in filePaths) {
+                    bool valid = false;
+                    foreach (var ext in setting.Exts) {
+                        if (filePath.EndsWith(ext))
+                            valid = true;
+                    }
+                    if (valid) {
+                        var texts = File.ReadAllLines(filePath);
+                        foreach (var text in texts) {
+                            var idx = text.IndexOf(pattern);
+                            if (idx != -1) {
+                                var splitPattern = @"\b(\w+)\b";
+                                string[] words = Regex.Split(text, splitPattern);
+                                string newText = String.Empty;
+                                int widx = 0;
+                                while (widx < words.Length && words[widx].IndexOf(pattern) == -1)
+                                    ++widx;
+                                for (int i = Math.Max(widx - pad, 0); i < Math.Min(widx + pad, words.Length); ++i)
+                                    newText += words[i];
+
+                                Docs doc = new Docs();
+                                doc.Path = filePath;
+                                doc.Preview = newText;
+                                doc.Write();
+                                break;
+                            }
+                        }
+                    }
+                    ++count;
+                    Counter counter = new Counter();
+                    counter.Checked = count;
+                    counter.Total = 1000;
+                    counter.Write();
+                }
+            }
+            catch (Exception ex) { }
         }
     }
 }

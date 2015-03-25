@@ -52,7 +52,6 @@
 				</div>
 			</div>
 		</div>
-
 	
 
 	<div id="main" class="container" onclick="closeMenu()" style="position:relative;"> 
@@ -65,8 +64,7 @@
 			</div>
 		</div>
 		<!--Search Bar + Button-->
-		<div class="row" style="margin-bottom: 70px">
-			
+		<div class="row" style="margin-bottom: 70px">			
 			<div class="col-sm-12 col-md-10">
 				<div class="form-group" width="100%">
 					<input name="query" type="text" value="What do you want to find?" onfocus="this.value=''" class="form-control" >
@@ -82,8 +80,11 @@
 		</div>
 	</div>
 	</form>
+	<div>
+		<div class="col-sm-3"></div>
+		<span id="counter">Count: 0</span>
+		<ul id="results" style="font-color: red">
+		</ul>
+	</div>
 </body>
-</html>
-<html>
-
 </html>
