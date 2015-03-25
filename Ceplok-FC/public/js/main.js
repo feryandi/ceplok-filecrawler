@@ -27,7 +27,7 @@ function Query() {
 			UpdateCounter(result.Checked, result.Total);
 		}
 		if (result.OutputType == 1) {
-			console.log(result.Preview);
+			
 		}
 	}
 	eventSource.onerror = function(e) {
