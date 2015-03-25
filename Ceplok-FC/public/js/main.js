@@ -2,9 +2,25 @@ function PopulateResult(result) {
 	$("#results").append("<li>" + result.Preview + "</li>");
 	$("#results").append("<li>" + result.Path + "</li>");
 }
+/*
+function UpdateCounter(checked, total) {
+	$("#counter").text(checked + '/' + total);
+}*/
 
 function UpdateCounter(checked, total) {
 	$("#counter").text(checked + '/' + total);
+	$("#loader").css('width', ( ( checked / total ) * 100 + '%') ) ;
+	if ( checked >= total ) {
+		$("#loader").css('width', ( '0%') ) ;		
+	}
+
+	/* FOR TESTING PURPOSE */
+	/* SCROLL TO RESULT */
+	if ( checked >= 640 ) {
+		$('html, body').animate({
+	        scrollTop: $("#result-list").offset().top
+	    }, 2000);
+	}
 }
 
 function RegisterHandler() {
@@ -27,6 +43,18 @@ function Query() {
 			UpdateCounter(result.Checked, result.Total);
 		}
 		if (result.OutputType == 1) {
+			/*Showing Result*/
+			var prevDiv = document.createElement("div");
+			var pathDiv = document.createElement("div");
+
+			pathDiv.innerHTML = result.Path;
+
+			prevDiv.innerHTML = result.Preview;
+			$(prevDiv).addClass('result');
+
+        	$("#result-list").append(prevDiv);
+        	$(prevDiv).append(pathDiv);
+
 			console.log(result.Preview);
 		}
 	}

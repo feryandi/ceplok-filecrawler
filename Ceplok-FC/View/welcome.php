@@ -52,9 +52,14 @@
 				</div>
 			</div>
 		</div>
-	
 
-	<div id="main" class="container" onclick="closeMenu()" style="position:relative;"> 
+	<div class="row" style="height: 5px; width:102%; position:fixed;">
+		<div class="col-sm-12" style="height: 100%">
+			<div id="loader" style="height: 100%; width:0%; background-color: white;"></div>
+		</div>
+	</div>	
+
+	<div id="main" class="container" onclick="closeMenu()" style="position:relative; height: 100vh"> 
 
 		<!-- style="z-index:5" -->
 		<!--Logo-->
@@ -82,9 +87,13 @@
 	</form>
 	<div>
 		<div class="col-sm-3"></div>
-		<span id="counter">Count: 0</span>
+		<span id="counter" style="color:white;">Count: 0</span>
 		<ul id="results" style="font-color: red">
 		</ul>
+	</div>
+
+	<div id="result-list" style="padding-left: 15%;padding-right: 15%">
+		<div style="color: white;"><h4>RESULT LIST</h4></div>
 	</div>
 </body>
 </html>
