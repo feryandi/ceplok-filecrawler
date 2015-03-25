@@ -246,3 +246,9 @@ input.cmn-toggle-round:checked + label:after {
 	content: "DFS";
 	margin-left: 47%;
 }
+
+.result {
+	background-color: white;
+	color: black;
+	border-radius: 5px;
+}

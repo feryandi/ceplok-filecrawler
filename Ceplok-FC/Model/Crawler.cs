@@ -7,7 +7,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
-using Microsoft.Office.Interop;
 
 namespace Ceplok_FC.Model {
     
@@ -109,16 +108,7 @@ namespace Ceplok_FC.Model {
 
         private static string ReadFromFile(string filePath, string ext) {
             switch (ext) {
-                case ".doc":
-                //case ".docx":
-                    Microsoft.Office.Interop.Word.Application application = new Microsoft.Office.Interop.Word.Application();
-                    Microsoft.Office.Interop.Word.Document doc = application.Documents.Open(filePath);
-                    var texts = String.Empty;
-                    for (var i = 0; i < doc.Words.Count; ++i) {
-                        texts += doc.Words[i];
-                    }
-                    application.Quit();
-                    return texts;
+                
                 default:
                     return File.ReadAllText(filePath);
             }
