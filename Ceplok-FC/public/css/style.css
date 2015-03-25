@@ -251,4 +251,14 @@ input.cmn-toggle-round:checked + label:after {
 	background-color: white;
 	color: black;
 	border-radius: 5px;
+	margin: 2em;
+	padding: 1em;
+}
+
+#result-nothing {
+	background-color: white;
+	color: black;
+	border-radius: 5px;
+	margin: 2em;
+	padding: 1em;
 }

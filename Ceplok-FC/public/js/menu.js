@@ -46,7 +46,7 @@ function toggleMenu() {
     }
 }
 
-function closeMenu() {;
+function closeMenu() {
 
   var element = document.getElementById('menu');
   var m = document.getElementById('menu-button');
@@ -74,4 +74,10 @@ function closeMenu() {;
     contain.style.webkitAnimation = 'goInMain 0.5s 0s linear forwards';
     contain.style.mozAnimation = 'goInMain 0.5s 0s linear forwards';
   }
+}
+
+function goTop() {
+    $('html, body').animate({
+          scrollTop: $("#query-form").offset().top
+      }, 500);  
 }
