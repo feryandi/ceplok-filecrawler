@@ -39,6 +39,7 @@ function Query() {
 	var eventSource = new EventSource("index.php?" + $("#query-form").serialize());
 	eventSource.onmessage = function(e) {
 		var result = JSON.parse(e.data);
+		console.log(e.data);
 		if (result.OutputType == 0) {
 			UpdateCounter(result.Checked, result.Total);
 		}
@@ -54,8 +55,6 @@ function Query() {
 
         	$("#result-list").append(prevDiv);
         	$(prevDiv).append(pathDiv);
-
-			console.log(result.Preview);
 		}
 	}
 	eventSource.onerror = function(e) {

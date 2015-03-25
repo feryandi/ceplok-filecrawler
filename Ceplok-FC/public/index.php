@@ -18,6 +18,7 @@
 			fwrite($pipes[0], $input);
 			fclose($pipes[0]);
 			/* Return HTTP Response */
+			send_message($input);
 			while ( !feof($pipes[1]) ) {
 				if ( ($message = fgets($pipes[1])) !== false) {
 					send_message($message);
