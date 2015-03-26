@@ -3,9 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace Ceplok_FC.Model {
-    class Output {
-        public List<Docs> Docs { get; set; }
+    abstract class Output {
+        public enum Type {
+            Counter,
+            Docs
+        }
+        public Type OutputType { get; set; }
+        public void Write() {
+            JavaScriptSerializer JSONSerializer = new JavaScriptSerializer();
+            Console.WriteLine(JSONSerializer.Serialize(this));
+        }
     }
 }

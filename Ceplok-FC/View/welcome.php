@@ -2,11 +2,18 @@
 
 <html lang="en">
 <head>
+	<meta charset="utf-8">
+	
+	<meta http-equiv="cache-control" content="max-age=0" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+	<meta http-equiv="pragma" content="no-cache" />
+
 	<title>Nyeplok</title>
 	<link rel = "stylesheet" href = "css/bootstrap.min.css">
 	<link rel = "stylesheet" href = "css/bootstrap-theme.min.css">
 	<link rel = "stylesheet" href = "css/style.css">
-	<meta charset="utf-8">
 	<script type="text/javascript" src="js/jquery-2.1.3.js"></script>
 	<script type="text/javascript" src="js/menu.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
@@ -53,9 +60,13 @@
 			</div>
 		</div>
 
-	
+	<div class="row" style="height: 5px; width:102%; position:fixed;">
+		<div class="col-sm-12" style="height: 100%">
+			<div id="loader" style="height: 100%; width:0%; background-color: white;"></div>
+		</div>
+	</div>	
 
-	<div id="main" class="container" onclick="closeMenu()" style="position:relative;"> 
+	<div id="main" class="container" onclick="closeMenu()" style="position:relative; height: 100vh"> 
 
 		<!-- style="z-index:5" -->
 		<!--Logo-->
@@ -65,15 +76,14 @@
 			</div>
 		</div>
 		<!--Search Bar + Button-->
-		<div class="row" style="margin-bottom: 70px">
-			
+		<div class="row" style="margin-bottom: 70px">			
 			<div class="col-sm-12 col-md-10">
 				<div class="form-group" width="100%">
-					<input name="query" type="text" value="What do you want to find?" onfocus="this.value=''" class="form-control" >
+					<input id="query-textbox" name="query" type="text" value="What do you want to find?" class="form-control" >
 				</div>
 			</div>
 			<div class="col-sm-12 col-md-2">
-				<input type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-search" style="margin-right: 10px"></span>Find!</button>
+				<input type="submit" class="btn btn-primary btn-block" value="Find!"><span class="glyphicon glyphicon-search" style="margin-right: 10px"></span></button>
 			</div>
 		</div>
 
@@ -82,8 +92,18 @@
 		</div>
 	</div>
 	</form>
-</body>
-</html>
-<html>
+	<div>
+		<div class="col-sm-3"></div>
+		<span id="counter" style="color:white;">Count: 0</span>
+		<ul id="results" style="font-color: red">
+		</ul>
+	</div>
 
+	<div id="result-list" style="padding-left: 15%;padding-right: 15%; min-height:100vh; display: none;">
+		<div style="color: white; padding: 15px;"><h2>Here is your result...</h2></div>
+		<div id="result-nothing">Oops.. We've found nothing</div>
+	</div>
+
+	<!--<div id="top-button" style="position:fixed; color:white; top:10px; right:10px" onclick="goTop()"><h4>AAAAA</h4></div>-->
+</body>
 </html>
