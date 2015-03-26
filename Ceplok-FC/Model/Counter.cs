@@ -11,5 +11,7 @@ namespace Ceplok_FC.Model {
         }
         public int Checked { get; set; }
         public int Total { get; set; }
+        public static DateTime LastPrint = DateTime.Now;
+        public const double Threshold = 250;
     }
 }

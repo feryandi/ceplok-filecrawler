@@ -32,6 +32,13 @@ function RegisterHandler() {
 			left: "+= 40px"
 		}, 500);
 	});
+	var queryclick = 0;
+	$("#query-textbox").click(function(){
+		if (queryclick == 0) {
+			$("#query-textbox").val("");
+			++queryclick;
+		}
+	});
 }
 
 var eventSource = null;
@@ -43,15 +50,9 @@ function Query() {
 			var result = JSON.parse(e.data);
 			if (result.OutputType == 0) {
 				UpdateCounter(result.Checked, result.Total);
-
-				if (result.Checked >= result.Total) {
-					eventSource.close();
-				}
-
 			}
 			if (result.OutputType == 1) {
 				$("#result-nothing").hide();
-				/*Showing Result*/
 				var prevDiv = document.createElement("div");
 				var pathDiv = document.createElement("div");
 
@@ -63,6 +64,7 @@ function Query() {
 	        	$("#result-list").append(prevDiv);
 	        	$(prevDiv).append(pathDiv);
 			}
+			
 		}
 		eventSource.onerror = function(e) {
 			eventSource.close();

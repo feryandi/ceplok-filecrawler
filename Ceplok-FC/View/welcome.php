@@ -2,11 +2,18 @@
 
 <html lang="en">
 <head>
+	<meta charset="utf-8">
+	
+	<meta http-equiv="cache-control" content="max-age=0" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+	<meta http-equiv="pragma" content="no-cache" />
+
 	<title>Nyeplok</title>
 	<link rel = "stylesheet" href = "css/bootstrap.min.css">
 	<link rel = "stylesheet" href = "css/bootstrap-theme.min.css">
 	<link rel = "stylesheet" href = "css/style.css">
-	<meta charset="utf-8">
 	<script type="text/javascript" src="js/jquery-2.1.3.js"></script>
 	<script type="text/javascript" src="js/menu.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
@@ -72,7 +79,7 @@
 		<div class="row" style="margin-bottom: 70px">			
 			<div class="col-sm-12 col-md-10">
 				<div class="form-group" width="100%">
-					<input name="query" type="text" value="What do you want to find?" onfocus="this.value=''" class="form-control" >
+					<input id="query-textbox" name="query" type="text" value="What do you want to find?" class="form-control" >
 				</div>
 			</div>
 			<div class="col-sm-12 col-md-2">
