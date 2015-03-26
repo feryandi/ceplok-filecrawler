@@ -1,14 +1,128 @@
-.sidebar {
-	position: fixed;
-	width: 340px;
-	height: 100%;
+.topbar {
+	position: absolute;
+	width: 100vw;
+	height: 42px;
 	z-index: 1;
-	/*-webkit-animation: goIn 1s 0s linear;*/
+	display: block;
+	background-color: #3d3d3d;
+	box-shadow: 0px 1px 8px black;
+	overflow: hidden;
+	font-family: "QuickSand";
 }
 
+.dir-menu {
+	float:left;
+	width: 25%;
+	height: 100%;
 
-.blacken {
-	background-color: #101010;	
+}
+
+.dir-menu .icon {
+	float: left;
+	width: 20%;
+	height: 100%;
+
+}
+
+.dir-menu .bar {
+	float: left;
+	width: 70%;
+	height: 100%;
+	margin-top: 10px;
+}
+
+.search-dir {
+	padding: .2em;
+}
+
+.option-menu {
+	float:left;
+	width: 40%;
+	height: 100%;
+	color: white;
+	font-size: 20px;
+}
+
+.big-radio {
+	width: 20px;
+	height: 20px;
+}
+
+.radio-holder {
+	display: inline-block;
+    width: 90px;
+    height: 20px;
+    text-align: center;
+    vertical-align: top;
+    padding-top: 10px;
+}
+
+.ext-menu {
+	float:left;
+	width: 12%;
+	height: 100%;
+	padding-top: 10px;
+	padding-left: 10px;
+	color: white;
+	font-size: 1.2em;
+}
+
+.menu-menu {
+	float:left;
+	width: 20%;
+	height: 100%;
+}
+
+.menu-menu .help {
+	float:left;
+	width: 45%;
+	height: 100%;
+	padding-top: 10px;
+	padding-left: 10px;	
+	color: white;
+	font-size: 1.2em;
+}
+
+.menu-menu .about {
+	float:left;
+	width: 45%;
+	height: 100%;
+	padding-top: 10px;
+	padding-left: 15px;	
+	color: white;
+	font-size: 1.2em;
+	
+}
+
+.menu {
+	width: 90%;
+	color: white;
+	margin-top: 20px;
+	margin-bottom: 25px;
+	margin-left: 10px;
+	font-weight: 700;
+}
+
+.menu.child {
+	font-size: 1em;	
+}
+
+.menu.parent {
+	font-size: 2em;	
+}
+
+.menu .content {
+	margin: .5em;
+}
+
+.child-menu-title {
+	width: 100%;
+	color: white;
+	margin-top: 20px;
+	margin-bottom: 25px;
+	margin-left: 10px;
+	font-size: 1em;
+	font-weight: 700;
 }
 
 .button-holder {
@@ -28,37 +142,37 @@
 
 @keyframes goIn {
 	0% {
-		left: 0px;
+		right: 0vw;
 	}
 	100% {
-		left: -240px;
+		right: -100vw;
 	}
 }
 
 @-webkit-keyframes goIn {
 	0% {
-		left: 0px;
+		right: 0vw;
 	}
 	100% {
-		left: -240px;
+		right: -100vw;
 	}
 }
 
 @keyframes goOut {
 	0% {
-		left: -240px;
+		right: -100vw;
 	}
 	100% {
-		left: 0px;
+		right: 0vw;
 	}
 }
 
 @-webkit-keyframes goOut {
 	0% {
-		left: -240px;
+		right: -100vw;
 	}
 	100% {
-		left: 0px;
+		right: 0vw;
 	}
 }
 
@@ -248,17 +362,82 @@ input.cmn-toggle-round:checked + label:after {
 }
 
 .result {
+	float: left;
+	width: 90%;
 	background-color: white;
 	color: black;
-	border-radius: 5px;
 	margin: 2em;
+	margin-top: 1em;
+	margin-bottom: 1em;
 	padding: 1em;
+	box-shadow: 0px 0px 8px #AAA;
 }
 
 #result-nothing {
+	float: left;
+	width: 90%;
 	background-color: white;
 	color: black;
-	border-radius: 5px;
 	margin: 2em;
 	padding: 1em;
+	box-shadow: 0px 0px 8px #AAA;
+}
+
+#result-list {
+	position: absolute;
+	margin-left: 5%;
+	margin-right: 5%; 
+	height:100vh;
+	width: 90vw;
+}
+
+#result-list .title {
+	width: 78%;
+	color: #3d3d3d; 
+	margin-top: 2em;
+	margin-left: 1.5em;
+	font-size: 1.5em;
+	float: left;
+}
+
+#result-list .icon {
+	float: left;
+	font-size: 3em;
+	margin-top: .5em;
+}
+
+#close-result {
+	position: fixed;
+	margin-top: 40vh;
+	border-radius: 0 80px 80px 0;
+	background-color: white;
+	width: 40px;
+	height: 80px;
+	box-shadow: 0px 0px 8px #AAA;
+	cursor: pointer;
+}
+
+#blink {
+	-webkit-animation: blinker 0.6s infinite;
+	-moz-animation: blinker 0.6s infinite;
+	animation: blinker 0.6s infinite;
+
+}
+
+@keyframes blinker {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+@-webkit-keyframes blinker {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }
