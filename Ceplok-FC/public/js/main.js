@@ -11,20 +11,19 @@ function UpdateCounter(checked, total) {
 	$("#counter").text(checked + '/' + total);
 	$("#loader").css('width', ( ( checked / total ) * 100 + '%') ) ;
 	if ( checked >= total ) {
-		$("#loader").css('width', ( '0%') ) ;		
-	}
-
-	/* FOR TESTING PURPOSE */
-	/* SCROLL TO RESULT */
-	if ( checked >= 640 ) {
+		$("#loader").css('width', ( '0%') ) ;
 		$('html, body').animate({
 	        scrollTop: $("#result-list").offset().top
-	    }, 2000);
+	    }, 500);		
 	}
+
 }
 
 function RegisterHandler() {
 	$("#query-form").submit(function() {
+		$(".result").remove();
+		$("#result-nothing").show();
+		$("#result-list").show();
 		Query();
 		return false;
 	});
@@ -44,8 +43,14 @@ function Query() {
 			var result = JSON.parse(e.data);
 			if (result.OutputType == 0) {
 				UpdateCounter(result.Checked, result.Total);
+
+				if (result.Checked >= result.Total) {
+					eventSource.close();
+				}
+
 			}
 			if (result.OutputType == 1) {
+				$("#result-nothing").hide();
 				/*Showing Result*/
 				var prevDiv = document.createElement("div");
 				var pathDiv = document.createElement("div");

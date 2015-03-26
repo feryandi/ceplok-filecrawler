@@ -76,7 +76,7 @@
 				</div>
 			</div>
 			<div class="col-sm-12 col-md-2">
-				<input type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-search" style="margin-right: 10px"></span>Find!</button>
+				<input type="submit" class="btn btn-primary btn-block" value="Find!"><span class="glyphicon glyphicon-search" style="margin-right: 10px"></span></button>
 			</div>
 		</div>
 
@@ -92,8 +92,11 @@
 		</ul>
 	</div>
 
-	<div id="result-list" style="padding-left: 15%;padding-right: 15%">
-		<div style="color: white;"><h4>RESULT LIST</h4></div>
+	<div id="result-list" style="padding-left: 15%;padding-right: 15%; min-height:100vh; display: none;">
+		<div style="color: white; padding: 15px;"><h2>Here is your result...</h2></div>
+		<div id="result-nothing">Oops.. We've found nothing</div>
 	</div>
+
+	<!--<div id="top-button" style="position:fixed; color:white; top:10px; right:10px" onclick="goTop()"><h4>AAAAA</h4></div>-->
 </body>
 </html>
