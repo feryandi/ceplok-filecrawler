@@ -18,20 +18,10 @@
 			fclose($pipes[0]);
 			/* Return HTTP Response */
 			send_message($input);
-			$lastPoll = time();
-			$last = "NO OUTPUT";
 			while ( !feof($pipes[1]) && !connection_aborted() ) {
 				if ( ($message = fgets($pipes[1])) !== false) {
-					/* Expensive operations */
-					if ($message == "DONE" . PHP_EOL) {
-						send_message($last);
-					}
-					else if (time() - $lastPoll >= POLL_RATE) {
-						send_message($message);
-						set_time_limit(ini_get("max_execution_time"));
-						$lastPoll = time();
-					}
-					$last = $message;
+					send_message($message);
+					set_time_limit(ini_get("max_execution_time"));
 				}
 			}
 			if (connection_aborted())
@@ -52,7 +42,7 @@
 				$input->Setting->Mode = 1;
 			else
 				$input->Setting->Mode = 0;
-			$input->Setting->Exts = array(".txt", ".doc");
+			$input->Setting->Exts = array(".txt", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx");
 			$input->Setting->Path = $_GET["sdir"];
 			exec_ceplok(json_encode(get_object_vars($input)));
 		}

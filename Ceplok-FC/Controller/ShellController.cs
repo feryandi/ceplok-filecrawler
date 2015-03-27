@@ -20,7 +20,6 @@ namespace Ceplok_FC {
             Input input = JSONSerializer.Deserialize<Input>(json);
             Crawler crawler = new Crawler();
             crawler.Run(input.Setting.Path, input.Query, input.Setting);
-            Console.WriteLine("DONE");
         }
     }
 }

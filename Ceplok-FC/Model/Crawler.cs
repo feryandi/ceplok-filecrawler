@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 
 namespace Ceplok_FC.Model {
     
@@ -45,7 +44,7 @@ namespace Ceplok_FC.Model {
                 try {
                     ret += Directory.GetFiles(curPath).Length;
                 }
-                catch (Exception ex) { }
+                catch (Exception) { }
                 try
                 {
                     var childPaths = Directory.GetDirectories(curPath);
@@ -54,7 +53,7 @@ namespace Ceplok_FC.Model {
                         nodeQueue.Enqueue(childPath);
                     }
                 }
-                catch (Exception ex) { }
+                catch (Exception) { }
             }
             return ret;
         }
@@ -71,7 +70,7 @@ namespace Ceplok_FC.Model {
                         nodeQueue.Enqueue(childPath);
                     }
                 }
-                catch (Exception ex) { }
+                catch (Exception) { }
             }
         }
 
@@ -82,7 +81,7 @@ namespace Ceplok_FC.Model {
                 foreach (var childPath in childPaths)
                     DoDFS(childPath, pattern, setting);
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
         }
 
         private void FindTextInFiles(string path, string pattern, Setting setting) {
@@ -99,7 +98,7 @@ namespace Ceplok_FC.Model {
                     SendCounter();
                 }
             }
-            catch (Exception ex) {
+            catch (Exception) {
             }
         }
 
@@ -116,11 +115,17 @@ namespace Ceplok_FC.Model {
 
         private static string ReadFromFile(string filePath, string ext) {
             switch (ext) {
+                case ".docx":
+                    return Ceplok_FC.Utility.DocxReader.GetTextFromDocx(filePath);
+                case ".pptx":
+                    return Ceplok_FC.Utility.PptxReader.GetSlideText(filePath);
+                case ".xlsx":
+                    return Ceplok_FC.Utility.XlsxReader.ReadExcelFileSAX(filePath);
                 default:
                     return File.ReadAllText(filePath);
             }
         }
-
+        
         private static void ProcessTexts(string text, string pattern, string filePath) {
             var splitPattern = @"\b(\w+)\b";
             string[] words = Regex.Split(text, splitPattern);
