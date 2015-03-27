@@ -81,3 +81,11 @@ function goTop() {
           scrollTop: $("#query-form").offset().top
       }, 500);  
 }
+
+function toggleResult() {
+  var e = document.getElementById('result-slide');
+
+  e.style.animation = 'goIn 0.5s 0s linear forwards';
+  e.style.webkitAnimation = 'goIn 0.5s 0s linear forwards';
+  e.style.mozAnimation = 'goIn 0.5s 0s linear forwards';
+}

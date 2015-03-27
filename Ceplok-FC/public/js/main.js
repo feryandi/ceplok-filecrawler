@@ -12,9 +12,15 @@ function UpdateCounter(checked, total) {
 	$("#loader").css('width', ( ( checked / total ) * 100 + '%') ) ;
 	if ( checked >= total ) {
 		$("#loader").css('width', ( '0%') ) ;
-		$('html, body').animate({
+		/*$('html, body').animate({
 	        scrollTop: $("#result-list").offset().top
-	    }, 500);		
+	    }, 500);*/
+
+		  var e = document.getElementById('result-slide');
+
+		  e.style.animation = 'goOut 0.5s 0s linear forwards';
+		  e.style.webkitAnimation = 'goOut 0.5s 0s linear forwards';
+		  e.style.mozAnimation = 'goOut 0.5s 0s linear forwards';		
 	}
 
 }
@@ -57,6 +63,7 @@ function Query() {
 				var pathDiv = document.createElement("div");
 
 				pathDiv.innerHTML = result.Path;
+				$(pathDiv).addClass('result-path');
 
 				prevDiv.innerHTML = result.Preview;
 				$(prevDiv).addClass('result');
