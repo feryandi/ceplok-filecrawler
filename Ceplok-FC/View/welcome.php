@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
+	<meta charset="utf-8">
+	
+	<meta http-equiv="cache-control" content="max-age=0" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+	<meta http-equiv="pragma" content="no-cache" />
+
+	<title>Nyeplok</title>
+	<link rel = "stylesheet" href = "css/bootstrap.min.css">
+	<link rel = "stylesheet" href = "css/bootstrap-theme.min.css">
+=======
 	<title>search_</title>
 	<!--<link rel = "stylesheet" href = "css/bootstrap.min.css">
 	<link rel = "stylesheet" href = "css/bootstrap-theme.min.css">-->
 	<link rel = "stylesheet" href = "css/global.css">
+>>>>>>> 6b45bb0b45c660a4eedcd4980a5e1510703c1bae
 	<link rel = "stylesheet" href = "css/style.css">
-	<meta charset="utf-8">
 	<script type="text/javascript" src="js/jquery-2.1.3.js"></script>
 	<script type="text/javascript" src="js/menu.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
@@ -49,7 +62,7 @@
 
 			<div id="search">			
 				<div class="bar">
-					<input name="query" type="text" placeholder="What do you want to find?" class="search-input" >
+					<input id="query-textbox" name="query" type="text" placeholder="What do you want to find?" class="search-input" >
 					<div id="loader"></div>
 				</div>	
 				<div class="btn">
