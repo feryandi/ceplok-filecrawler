@@ -1,24 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<<<<<<< HEAD
-	<meta charset="utf-8">
-	
-	<meta http-equiv="cache-control" content="max-age=0" />
-	<meta http-equiv="cache-control" content="no-cache" />
-	<meta http-equiv="expires" content="0" />
-	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-	<meta http-equiv="pragma" content="no-cache" />
-
-	<title>Nyeplok</title>
-	<link rel = "stylesheet" href = "css/bootstrap.min.css">
-	<link rel = "stylesheet" href = "css/bootstrap-theme.min.css">
-=======
 	<title>search_</title>
 	<!--<link rel = "stylesheet" href = "css/bootstrap.min.css">
 	<link rel = "stylesheet" href = "css/bootstrap-theme.min.css">-->
 	<link rel = "stylesheet" href = "css/global.css">
->>>>>>> 6b45bb0b45c660a4eedcd4980a5e1510703c1bae
 	<link rel = "stylesheet" href = "css/style.css">
 	<script type="text/javascript" src="js/jquery-2.1.3.js"></script>
 	<script type="text/javascript" src="js/menu.js"></script>
@@ -35,7 +21,7 @@
 		<div class="dir-menu">
 			<div class="icon"></div>
 			<div class="bar">
-				<input name="sdir" type="text" placeholder="C:/" class="search-dir" >
+				<input id="sdir" name="sdir" type="text" class="search-dir" value="C:/">
 			</div>
 		</div>
 		<div class="option-menu">
