@@ -1,6 +1,20 @@
 function PopulateResult(result) {
-	$("#results").append("<li>" + result.Preview + "</li>");
-	$("#results").append("<li>" + result.Path + "</li>");
+	$("#result-nothing").hide();
+	var prevDiv = document.createElement("div");
+	var link = document.createElement("a");
+	var pathDiv = document.createElement("div");
+
+	link.innerHTML = result.Path;
+	link.href = "open.php?path=" + result.Path;
+	link.target = "_blank";
+	$(pathDiv).append(link);
+	$(pathDiv).addClass('result-path');
+
+	prevDiv.innerHTML = result.Preview;
+	$(prevDiv).addClass('result');
+
+	$("#result-list").append(prevDiv);
+	$(prevDiv).append(pathDiv);;
 }
 /*
 function UpdateCounter(checked, total) {
@@ -25,7 +39,33 @@ function UpdateCounter(checked, total) {
 
 }
 
+
+var eventSource = null;
+
+function Query() {
+	if (eventSource === null || eventSource.readyState == EventSource.CLOSED) {
+		eventSource = new EventSource("index.php?" + $("#query-form").serialize());
+		eventSource.onmessage = function(e) {
+			var result = JSON.parse(e.data);
+			if (result.OutputType == 0) {
+				UpdateCounter(result.Checked, result.Total);
+			}
+			if (result.OutputType == 1) {
+				PopulateResult(result);
+			}
+			
+		}
+		eventSource.onerror = function(e) {
+			eventSource.close();
+		}
+	}
+}
+
 function RegisterHandler() {
+	$(window).unload(function() {
+		if (eventSource != null)
+			eventSource.close();
+	});
 	$("#query-form").submit(function() {
 		$(".result").remove();
 		$("#result-nothing").show();
@@ -45,39 +85,15 @@ function RegisterHandler() {
 			++queryclick;
 		}
 	});
+	var sdirclick = 0;
+	$("#sdir").click(function(){
+		if (sdirclick == 0) {
+			$("#sdir").val("");
+			++sdirclick;
+		}
+	});
 }
 
-var eventSource = null;
-
-function Query() {
-	if (eventSource === null || eventSource.readyState == EventSource.CLOSED) {
-		eventSource = new EventSource("index.php?" + $("#query-form").serialize());
-		eventSource.onmessage = function(e) {
-			var result = JSON.parse(e.data);
-			if (result.OutputType == 0) {
-				UpdateCounter(result.Checked, result.Total);
-			}
-			if (result.OutputType == 1) {
-				$("#result-nothing").hide();
-				var prevDiv = document.createElement("div");
-				var pathDiv = document.createElement("div");
-
-				pathDiv.innerHTML = result.Path;
-				$(pathDiv).addClass('result-path');
-
-				prevDiv.innerHTML = result.Preview;
-				$(prevDiv).addClass('result');
-
-	        	$("#result-list").append(prevDiv);
-	        	$(prevDiv).append(pathDiv);
-			}
-			
-		}
-		eventSource.onerror = function(e) {
-			eventSource.close();
-		}
-	}
-}
 $(document).ready(function() {
 	RegisterHandler();
 });

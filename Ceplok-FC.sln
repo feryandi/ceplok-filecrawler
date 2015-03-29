@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceplok-FC", "Ceplok-FC\Ceplok-FC.csproj", "{EB435F78-F898-44AD-9E78-B5073414BB41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceplok-OP", "Ceplok-OP\Ceplok-OP.csproj", "{C8DBE11C-8CAE-4D8B-A723-A3807F64B2AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{EB435F78-F898-44AD-9E78-B5073414BB41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB435F78-F898-44AD-9E78-B5073414BB41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB435F78-F898-44AD-9E78-B5073414BB41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8DBE11C-8CAE-4D8B-A723-A3807F64B2AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8DBE11C-8CAE-4D8B-A723-A3807F64B2AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8DBE11C-8CAE-4D8B-A723-A3807F64B2AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8DBE11C-8CAE-4D8B-A723-A3807F64B2AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
