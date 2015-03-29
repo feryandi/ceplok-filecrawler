@@ -11,8 +11,7 @@
 
 	function exec_ceplok($input) {
 		$descriptorspec = array(0 => array("pipe", "r"), 1 => array("pipe", "w"));
-		//$cwd = __DIR__ . '/../bin/Release/' ;
-		$cwd = __DIR__ . '/../bin/Debug/' ;
+		$cwd = __DIR__ . '/../bin/Release/' ;
 		$process = proc_open('Ceplok-FC', $descriptorspec, $pipes, $cwd);
 		if (is_resource($process)) {
 			fwrite($pipes[0], $input);

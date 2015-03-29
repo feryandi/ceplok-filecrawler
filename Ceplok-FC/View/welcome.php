@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="utf-8">
-<meta http-equiv="cache-control" content="max-age=0" />
-<meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="expires" content="0" />
-<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-<meta http-equiv="pragma" content="no-cache" />
-
 <head>
+<<<<<<< HEAD
+	<meta charset="utf-8">
+	
+	<meta http-equiv="cache-control" content="max-age=0" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+	<meta http-equiv="pragma" content="no-cache" />
+
+	<title>Nyeplok</title>
+	<link rel = "stylesheet" href = "css/bootstrap.min.css">
+	<link rel = "stylesheet" href = "css/bootstrap-theme.min.css">
+=======
 	<title>search_</title>
 	<!--<link rel = "stylesheet" href = "css/bootstrap.min.css">
 	<link rel = "stylesheet" href = "css/bootstrap-theme.min.css">-->
 	<link rel = "stylesheet" href = "css/global.css">
+>>>>>>> 6b45bb0b45c660a4eedcd4980a5e1510703c1bae
 	<link rel = "stylesheet" href = "css/style.css">
-	<meta charset="utf-8">
 	<script type="text/javascript" src="js/jquery-2.1.3.js"></script>
 	<script type="text/javascript" src="js/menu.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
@@ -47,7 +53,7 @@
 	</div>
 
 	<div class="backholder first">
-		<div id="main" class="container"> 
+		<div id="main" class="container" onclick="closeMenu()"> 
 
 			<div id="logo">
 				<center class="text">search<span id="blink">_</span></center>
@@ -71,7 +77,7 @@
 	</form>
 
 
-	<!--<span id="counter" class="centered-text">Count: 0</span>-->
+	<!--<span class="centered-text">Count: 0</span>-->
 
 	<div id="result-slide" class="backholder result-page">
 	

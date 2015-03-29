@@ -52,16 +52,12 @@ var eventSource = null;
 function Query() {
 	if (eventSource === null || eventSource.readyState == EventSource.CLOSED) {
 		eventSource = new EventSource("index.php?" + $("#query-form").serialize());
-	
 		eventSource.onmessage = function(e) {
-			console.log("xxxa");
 			var result = JSON.parse(e.data);
 			if (result.OutputType == 0) {
 				UpdateCounter(result.Checked, result.Total);
 			}
 			if (result.OutputType == 1) {
-				console.log("aaaaaa");
-
 				$("#result-nothing").hide();
 				var prevDiv = document.createElement("div");
 				var pathDiv = document.createElement("div");
