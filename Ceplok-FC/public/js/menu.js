@@ -56,9 +56,19 @@ function goTop() {
 function toggleResult() {
   var e = document.getElementById('result-slide');
 
-  e.style.animation = 'goIn 0.5s 0s linear forwards';
-  e.style.webkitAnimation = 'goIn 0.5s 0s linear forwards';
-  e.style.mozAnimation = 'goIn 0.5s 0s linear forwards';
+  var style = window.getComputedStyle(e),
+  right = style.getPropertyValue('right'),
+  nRight = Number(right.replace("px",""));
+
+  if ( nRight >= -15) {
+    e.style.animation = 'goIn 0.5s 0s linear forwards';
+    e.style.webkitAnimation = 'goIn 0.5s 0s linear forwards';
+    e.style.mozAnimation = 'goIn 0.5s 0s linear forwards';
+  } else {
+    e.style.animation = 'goOut 0.5s 0s linear forwards';
+    e.style.webkitAnimation = 'goOut 0.5s 0s linear forwards';
+    e.style.mozAnimation = 'goOut 0.5s 0s linear forwards';    
+  }
 }
 
 function toggleExt() {
@@ -93,4 +103,14 @@ function toggleOFF(n) {
   e.style.animation = 'goIn 0.5s 0s linear forwards';
   e.style.webkitAnimation = 'goIn 0.5s 0s linear forwards';
   e.style.mozAnimation = 'goIn 0.5s 0s linear forwards';  
+}
+
+function toggleShow(n) {
+  var e = document.getElementById(n);
+  e.style.display = 'block';
+}
+
+function toggleHide(n) {
+  var e = document.getElementById(n);
+  e.style.display = 'none';
 }

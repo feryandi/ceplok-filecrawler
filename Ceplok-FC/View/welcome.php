@@ -36,8 +36,8 @@
 			<div class="click" onclick="toggleExt()"></div>
 		</div>
 		<div class="menu-menu">
-			<div class="help">Help</div>
-			<div class="about" onclick="toggleON('about-slide')">About</div>
+			<div class="help" onclick="toggleShow('help')">Help</div>
+			<div class="about" onclick="toggleShow('popup')">About</div>
 		</div>
 
 	</div>
@@ -69,6 +69,8 @@
 
 			<div id="copyright">2015</div>
 		</div>
+
+		<div id="open-result" onclick="toggleResult()"><</div>
 	</div>
 
 	</form>
@@ -84,18 +86,69 @@
 			<div id="result-nothing">Oops.. We've found nothing</div>
 		</div>
 
-		<div id="close-result" onclick="toggleResult()"><</div>
+		<div id="close-result" onclick="toggleResult()">></div>
 	
 	</div>
-<!--
-	<div class="backholder popup">
+
+	<div class="backholder popup" id="popup" onclick="toggleHide('popup')" style="display: none">
 
 		<div class="pop">
-			ABOUT
+			<div class="title">ABOUT US</div>
+			
+			<div class="profile">
+				<div class="pic"><img src="/img/profile-1.png"></div>
+				<div class="desc">
+					<center style="font-size: 1.3em">Adin Baskoro Pratomo</center>
+					<center>135 13 058</center>
+					<br>
+					<center><img src="/img/github.png" style="width: 15%"></center>
+					<center><a href="http://github.com/adinb" target="_blank">adinb</a></center>
+				</div>
+			</div>
+
+			<div class="profile">
+				<div class="pic"><img src="/img/profile-2.png"></div>
+				<div class="desc">
+					<center style="font-size: 1.3em">Aufar Gibran</center>
+					<center>135 13 015</center>
+					<br>
+					<center><img src="/img/github.png" style="width: 15%"></center>
+					<center><a href="http://github.com/kucingimbalance" target="_blank">kucingimbalance</a></center>
+				</div>
+			</div>
+
+			<div class="profile">
+				<div class="pic"><img src="/img/profile-3.png"></div>
+				<div class="desc">
+					<center style="font-size: 1.3em">Feryandi Nurdiantoro</center>
+					<center>135 13 042</center>
+					<br>
+					<center><img src="/img/github.png" style="width: 15%"></center>
+					<center><a href="http://github.com/feryandi" target="_blank">feryandi</a></center>
+				</div>
+			</div>
 		</div>
 
 	</div>
--->
+
+
+	<div class="backholder popup" id="help" onclick="toggleHide('help')" style="display: none">
+
+		<div class="pop">
+			<div class="title">NEED SOME HELP?</div>
+			<br>
+				<center>
+					<video width="720" controls>
+						<source src="/img/help.mp4" type="video/mp4">
+						Your browser doesn't support HTML5 video.
+						Luckily, our search_ is simple, you doesn't really need help!
+					</video>
+				</center>
+			</div>
+		</div>
+
+	</div>
+
 
 </body>
 </html>

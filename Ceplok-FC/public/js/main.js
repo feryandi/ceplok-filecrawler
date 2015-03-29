@@ -5,6 +5,7 @@ function PopulateResult(result) {
 	var nameDiv = document.createElement("div");
 	var pathDiv = document.createElement("div");
 	var holder = document.createElement("div");
+	var result = document.createElement("div");
 
 	link.innerHTML = result.Path;
 	link.href = "open.php?path=" + result.Path;

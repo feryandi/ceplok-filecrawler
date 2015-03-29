@@ -21,8 +21,8 @@
 	function exec_ceplok($input) {
 		ignore_user_abort(true);
 		$descriptorspec = array(0 => array("pipe", "r"), 1 => array("pipe", "w"));
-		//$cwd = __DIR__ . '/../bin/Release/' ;
-		$cwd = __DIR__ . '/../bin/Debug/' ;
+		$cwd = __DIR__ . '/../bin/Release/' ;
+		//$cwd = __DIR__ . '/../bin/Debug/' ;
 		$process = proc_open('Ceplok-FC', $descriptorspec, $pipes, $cwd);
 		if (is_resource($process)) {
 			fwrite($pipes[0], $input);
@@ -50,10 +50,7 @@
 			$query = $_GET["query"];
 			$input = new Input();
 			$input->Query = $query;
-			if (isset($_GET["algo"]))
-				$input->Setting->Mode = 1;
-			else
-				$input->Setting->Mode = 0;
+			$input->Setting->Mode = $_GET["algo"];
 
 			/*Extension*/
 			$textType = array(".asp", ".css", ".js", ".acgi", ".htm", ".html", ".htmls", ".htx", ".shtml", ".js", ".mcf", ".pas", ".c", ".c++", ".cc", ".com", ".conf", ".cxx", ".def", ".f", ".f90", ".for", ".g", ".h", ".hh", ".idc", ".jav", ".java", ".list", ".log", ".lst", ".m", ".mar", ".pl", ".sdml", ".text", ".txt", ".rt", ".rtf", ".rtx", ".wsc", ".sgm", ".sgml", ".tsv", ".uni", ".unis", ".uri", ".uris", ".abc", ".flx", ".rt", ".wml", ".wmls", ".htt", ".asm", ".s", ".aip", ".c", ".cc", ".cpp", ".htc", ".f", ".f77", ".f90", ".for", ".h", ".hh", ".jav", ".java", ".lsx", ".m", ".xml", ".p", ".hlb", ".csh", ".el", ".scm", ".ksh", ".lsp", ".pl", ".pm", ".py", ".rexx", ".scm", ".sh", ".tcl", ".tcsh", ".zsh", ".shtml", ".ssi", ".etx", ".sgm", ".sgml", ".spc", ".talk", ".uil", ".uu", ".uue", ".vcs", ".txt");

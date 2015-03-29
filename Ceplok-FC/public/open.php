@@ -8,6 +8,8 @@
 			if (is_resource($process)) {
 				fwrite($pipes[0], $input);
 				fclose($pipes[0]);
+				fclose($pipes[1]);
+				proc_close($process);
 			}
 		}
 		else {

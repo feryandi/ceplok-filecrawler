@@ -80,15 +80,6 @@ input[type="radio"] {
 	background-color: rgba(0, 0, 0, 0.6);;
 }
 
-.popup .pop {
-	position: absolute;
-	z-index: 100;
-	background-color: #e4e4e4;
-	width: 80vw;
-	height: 80vh;
-	border-radius: 10px;
-}
-
 .backholder.about-page {
 	position: absolute;
 	background-color: #121212;
