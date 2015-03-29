@@ -12,5 +12,7 @@ namespace Ceplok_FC.Model {
         }
         public string Path { get; set; }
         public string Preview { get; set; }
+
+        public string FileName { get; set; }
     }
 }

@@ -2,19 +2,29 @@ function PopulateResult(result) {
 	$("#result-nothing").hide();
 	var prevDiv = document.createElement("div");
 	var link = document.createElement("a");
+	var nameDiv = document.createElement("div");
 	var pathDiv = document.createElement("div");
+	var holder = document.createElement("div");
 
 	link.innerHTML = result.Path;
 	link.href = "open.php?path=" + result.Path;
 	link.target = "_blank";
+
 	$(pathDiv).append(link);
 	$(pathDiv).addClass('result-path');
 
-	prevDiv.innerHTML = result.Preview;
-	$(prevDiv).addClass('result');
+	nameDiv.innerHTML = result.FileName;
+	$(nameDiv).addClass('result-name');
 
-	$("#result-list").append(prevDiv);
-	$(prevDiv).append(pathDiv);;
+	prevDiv.innerHTML = (result.Preview).replace($("#query-textbox").val(), "<b style=\"color: #5a69ff\">" + $("#query-textbox").val() + "</b>");
+	$(prevDiv).addClass('result-preview');
+
+	$("#result-list").append(holder);
+
+	$(holder).addClass('result');
+	$(holder).append(nameDiv);
+	$(holder).append(prevDiv);
+	$(holder).append(pathDiv);
 }
 /*
 function UpdateCounter(checked, total) {
@@ -85,45 +95,11 @@ function RegisterHandler() {
 			++queryclick;
 		}
 	});
-<<<<<<< HEAD
-}
-
-var eventSource = null;
-
-function Query() {
-	if (eventSource === null || eventSource.readyState == EventSource.CLOSED) {
-		eventSource = new EventSource("index.php?" + $("#query-form").serialize());
-	
-		eventSource.onmessage = function(e) {
-			console.log("xxxa");
-			var result = JSON.parse(e.data);
-			if (result.OutputType == 0) {
-				UpdateCounter(result.Checked, result.Total);
-			}
-			if (result.OutputType == 1) {
-				console.log("aaaaaa");
-
-				$("#result-nothing").hide();
-				var prevDiv = document.createElement("div");
-				var pathDiv = document.createElement("div");
-
-				pathDiv.innerHTML = result.Path;
-				$(pathDiv).addClass('result-path');
-
-				prevDiv.innerHTML = result.Preview;
-				$(prevDiv).addClass('result');
-
-	        	$("#result-list").append(prevDiv);
-	        	$(prevDiv).append(pathDiv);
-			}
-			
-=======
 	var sdirclick = 0;
 	$("#sdir").click(function(){
 		if (sdirclick == 0) {
 			$("#sdir").val("");
 			++sdirclick;
->>>>>>> d95d7f0b455548359275bc9e33f8e18d70fd8120
 		}
 	});
 }

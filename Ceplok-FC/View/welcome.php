@@ -1,22 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-<meta charset="utf-8">
-<meta http-equiv="cache-control" content="max-age=0" />
-<meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="expires" content="0" />
-<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-<meta http-equiv="pragma" content="no-cache" />
-
-=======
->>>>>>> d95d7f0b455548359275bc9e33f8e18d70fd8120
 <head>
 	<title>search_</title>
 	<!--<link rel = "stylesheet" href = "css/bootstrap.min.css">
 	<link rel = "stylesheet" href = "css/bootstrap-theme.min.css">-->
 	<link rel = "stylesheet" href = "css/global.css">
 	<link rel = "stylesheet" href = "css/style.css">
-	<meta charset="utf-8">
 	<script type="text/javascript" src="js/jquery-2.1.3.js"></script>
 	<script type="text/javascript" src="js/menu.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
@@ -36,17 +25,28 @@
 			</div>
 		</div>
 		<div class="option-menu">
+			<div class="icon"></div>
 			<div class="radio-holder"><input name="algo" type="radio" value="0" class="big-radio" checked> BFS</div>
 			<div class="radio-holder"><input name="algo" type="radio" value="1" class="big-radio" > DFS</div>
 		</div>
 		<div class="ext-menu">
-			Extensions:
+			<div class="text">
+				Extensions:
+			</div>
+			<div class="click" onclick="toggleExt()"></div>
 		</div>
 		<div class="menu-menu">
 			<div class="help">Help</div>
-			<div class="about">About</div>
+			<div class="about" onclick="toggleON('about-slide')">About</div>
 		</div>
 
+	</div>
+
+	<div id="ext-holder" style="top: -15vh">
+		<input name="ext-txt" type="checkbox" value="1" checked> .txt / text <br>
+		<input name="ext-doc" type="checkbox" value="1" checked> .doc / .docx <br>
+		<input name="ext-xls" type="checkbox" value="1" checked> .xls / .xlsx <br>
+		<input name="ext-ppt" type="checkbox" value="1" checked> .ppt / .pptx 
 	</div>
 
 	<div class="backholder first">
@@ -54,7 +54,7 @@
 
 			<div id="logo">
 				<center class="text">search<span id="blink">_</span></center>
-				<center class="subtext">It's that simple. Really.</center>
+				<center class="subtext">It's that simple. Really?</center>
 			</div>
 
 			<div id="search">			
@@ -84,9 +84,18 @@
 			<div id="result-nothing">Oops.. We've found nothing</div>
 		</div>
 
-		<div id="close-result" onclick="toggleResult()"></div>
+		<div id="close-result" onclick="toggleResult()"><</div>
 	
 	</div>
+<!--
+	<div class="backholder popup">
+
+		<div class="pop">
+			ABOUT
+		</div>
+
+	</div>
+-->
 
 </body>
 </html>

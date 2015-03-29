@@ -139,6 +139,7 @@ namespace Ceplok_FC.Model {
                 }
 
                 Docs doc = new Docs();
+                doc.FileName = Path.GetFileName(filePath);
                 doc.Path = filePath;
                 doc.Preview = newText;
                 doc.Write();
